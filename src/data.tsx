@@ -7,7 +7,9 @@ export type Photo = {
 };
 
 export const readData = async () => {
-  const resp = await fetch("scrimba-react-bootcamp-images/images.json");
+  const resp = await fetch(
+    "https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json"
+  );
   const rawPhotos: RawPhoto[] = await resp.json();
   const convert = (p: RawPhoto): Photo => {
     const idAsInt = parseInt(p.id);
