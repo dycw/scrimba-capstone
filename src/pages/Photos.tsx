@@ -1,5 +1,7 @@
 import { Context } from "../Context";
+import Image from "../components/Image";
 import { Photo, readData } from "../data";
+import { getImageClass } from "../utils";
 import { useContext, useEffect } from "react";
 
 export default function Photos() {
@@ -13,14 +15,12 @@ export default function Photos() {
   }, []);
 
   const render = (photo: Photo) => {
-    return (
-      <div>
-        <img src={photo.url} alt="" />
-        <p> {photo.isFavorite ? "isFav" : "isNotFav"} </p>
-      </div>
-    );
+    const imageClass = getImageClass(photo.id);
+    return <Image key={photo.id} url={photo.url} className={imageClass} />;
   };
+
   const photos = context.photos.map(render);
+
   return (
     <main className="photos">
       <h1>Images go here</h1>
