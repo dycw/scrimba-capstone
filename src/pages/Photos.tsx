@@ -21,10 +21,5 @@ export default function Photos() {
 
   const photos = context.photos.map(render);
 
-  return (
-    <main className="photos">
-      <h1>Images go here</h1>
-      {photos}
-    </main>
-  );
+  return <main className="photos">{photos}</main>;
 }
