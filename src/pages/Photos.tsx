@@ -1,9 +1,17 @@
 import { Context } from "../Context";
-import { Photo } from "../data";
-import { useContext } from "react";
+import { Photo, readData } from "../data";
+import { useContext, useEffect } from "react";
 
 export default function Photos() {
   const context = useContext(Context);
+
+  useEffect(() => {
+    const runReadData = async () => {
+      context.setPhotos(await readData());
+    };
+    runReadData();
+  }, []);
+
   const render = (photo: Photo) => {
     return (
       <div>

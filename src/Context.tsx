@@ -1,23 +1,22 @@
-import { readData, Photo } from "./data";
-import { useState, createContext } from "react";
+import { Photo } from "./data";
+import { useState, createContext, Dispatch, SetStateAction } from "react";
 
 type ContextType = {
   photos: Photo[];
+  setPhotos: Dispatch<SetStateAction<Photo[]>>;
 };
-const defaultState = { value: "", photos: await readData() };
-export const Context = createContext<ContextType>(defaultState);
+export const Context = createContext<ContextType>({} as ContextType);
 
 type Props = {
   children: React.ReactElement;
-  initPhotos?: Photo[];
 };
 
 export function ContextProvider(props: Props) {
-  const [photos, _] = useState<Photo[]>(
-    props.initPhotos ?? defaultState.photos
-  );
+  const [photos, setPhotos] = useState<Photo[]>([]);
 
   return (
-    <Context.Provider value={{ photos }}>{props.children}</Context.Provider>
+    <Context.Provider value={{ photos, setPhotos }}>
+      {props.children}
+    </Context.Provider>
   );
 }
