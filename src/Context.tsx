@@ -6,6 +6,9 @@ type ContextType = {
   photos: Photo[];
   setPhotos: Dispatch<SetStateAction<Photo[]>>;
   toggleFavorite: (id: number) => void;
+  cart: Photo[];
+  setCart: Dispatch<SetStateAction<Photo[]>>;
+  addToCart: (photo: Photo) => void;
 };
 export const Context = createContext<ContextType>({} as ContextType);
 
@@ -15,6 +18,7 @@ type Props = {
 
 export function ContextProvider(props: Props) {
   const [photos, setPhotos] = useImmer<Photo[]>([]);
+  const [cart, setCart] = useImmer<Photo[]>([]);
 
   const toggleFavorite = (id: number) => {
     setPhotos((photos: Photo[]) => {
@@ -25,8 +29,18 @@ export function ContextProvider(props: Props) {
     });
   };
 
+  const addToCart = (photo: Photo) => {
+    setCart((photos: Photo[]) => {
+      if (!photos.includes(photo)) {
+        photos.push(photo);
+      }
+    });
+  };
+
   return (
-    <Context.Provider value={{ photos, setPhotos, toggleFavorite }}>
+    <Context.Provider
+      value={{ photos, setPhotos, toggleFavorite, cart, setCart, addToCart }}
+    >
       {props.children}
     </Context.Provider>
   );
