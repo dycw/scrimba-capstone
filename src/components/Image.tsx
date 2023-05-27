@@ -10,20 +10,23 @@ type Props = {
 };
 
 export default function Image(props: Props) {
+  const context = useContext(Context);
   const [isHovered, setIsHovered] = useImmer(false);
+
   const handleMouseEnter = () => {
     setIsHovered((_: boolean) => true);
   };
   const handleMouseLeave = () => {
     setIsHovered((_: boolean) => false);
   };
-  const context = useContext(Context);
   const handleClick = () => {
     context.toggleFavorite(props.photo.id);
   };
 
-  const heartIcon = isHovered && (
-    <i className="ri-heart-line favorite" onClick={handleClick}></i>
+  const isFavorite = props.photo.isFavorite;
+  const heartClass = isFavorite ? "ri-heart-fill" : "ri-heart-line";
+  const heartIcon = (isFavorite || isHovered) && (
+    <i className={`${heartClass} favorite`} onClick={handleClick}></i>
   );
   const cartIcon = isHovered && <i className="ri-add-circle-line cart"></i>;
 
