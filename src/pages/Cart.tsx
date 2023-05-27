@@ -14,6 +14,7 @@ export default function Cart() {
   const cart = context.cart.map(render);
 
   const total = context.cart.reduce((acc, el) => acc + el.cost, 0);
+  const isButtonDisabled = context.cart.length === 0;
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -31,7 +32,9 @@ export default function Cart() {
       {cart}
       <p className="total-cost">Total: ${total}</p>
       <div className="order-button">
-        <button onClick={handleClick}>{buttonText}</button>
+        <button disabled={isButtonDisabled} onClick={handleClick}>
+          {buttonText}
+        </button>
       </div>
     </main>
   );
