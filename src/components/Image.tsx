@@ -26,13 +26,14 @@ export default function Image(props: Props) {
     context.addToCart(props.photo);
   };
 
-  const isFavorite = props.photo.isFavorite;
-  const heartClass = isFavorite ? "ri-heart-fill" : "ri-heart-line";
-  const heartIcon = (isFavorite || isHovered) && (
+  const heartClass = props.photo.isFavorite ? "ri-heart-fill" : "ri-heart-line";
+  const heartIcon = (props.photo.isFavorite || isHovered) && (
     <i className={`${heartClass} favorite`} onClick={handleClickHeart}></i>
   );
-  const cartIcon = isHovered && (
-    <i className="ri-add-circle-line cart" onClick={handleClickCart}></i>
+  const isInCart = context.cart.some((photo) => photo.id === props.photo.id);
+  const cartClass = isInCart ? "ri-shopping-cart-fill" : "ri-add-circle-line";
+  const cartIcon = (isInCart || isHovered) && (
+    <i className={`${cartClass} cart`} onClick={handleClickCart}></i>
   );
 
   return (
