@@ -8,7 +8,7 @@ type ContextType = {
   toggleFavorite: (id: number) => void;
   cart: Photo[];
   setCart: Dispatch<SetStateAction<Photo[]>>;
-  addToCart: (photo: Photo) => void;
+  toggleCart: (photo: Photo) => void;
 };
 export const Context = createContext<ContextType>({} as ContextType);
 
@@ -29,9 +29,12 @@ export function ContextProvider(props: Props) {
     });
   };
 
-  const addToCart = (photo: Photo) => {
+  const toggleCart = (photo: Photo) => {
     setCart((photos: Photo[]) => {
-      if (!photos.includes(photo)) {
+      const index = photos.findIndex((p) => p.id === photo.id);
+      if (index !== -1) {
+        photos.splice(index, 1);
+      } else {
         photos.push(photo);
       }
     });
@@ -39,7 +42,14 @@ export function ContextProvider(props: Props) {
 
   return (
     <Context.Provider
-      value={{ photos, setPhotos, toggleFavorite, cart, setCart, addToCart }}
+      value={{
+        photos,
+        setPhotos,
+        toggleFavorite,
+        cart,
+        setCart,
+        toggleCart,
+      }}
     >
       {props.children}
     </Context.Provider>

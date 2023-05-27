@@ -23,7 +23,7 @@ export default function Image(props: Props) {
     context.toggleFavorite(props.photo.id);
   };
   const handleClickCart = () => {
-    context.addToCart(props.photo);
+    context.toggleCart(props.photo);
   };
 
   const heartClass = props.photo.isFavorite ? "ri-heart-fill" : "ri-heart-line";
