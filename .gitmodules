@@ -1,0 +1,3 @@
+[submodule "scrimba-react-bootcamp-images"]
+	path = scrimba-react-bootcamp-images
+	url = https://github.com/bobziroll/scrimba-react-bootcamp-images.git

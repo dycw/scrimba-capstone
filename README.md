@@ -1,6 +1,6 @@
-# `template-react`
+# Scrimba Capstone
 
-Template for React repositories
+https://scrimba.com/playlist/pqxq9H7
 
 ## Getting started
 
