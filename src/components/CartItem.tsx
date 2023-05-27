@@ -17,7 +17,7 @@ export default function CartItem(props: Props) {
     <div className="cart-item">
       <i className="ri-delete-bin-line" onClick={handleClick}></i>
       <img src={props.photo.url} alt="" width="130px" />
-      <p>$5.99</p>
+      <p>{props.photo.cost}</p>
     </div>
   );
 }

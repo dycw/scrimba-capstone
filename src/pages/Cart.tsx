@@ -9,11 +9,13 @@ export default function Cart() {
   const render = (photo: Photo) => <CartItem key={photo.id} photo={photo} />;
   const cart = context.cart.map(render);
 
+  const total = context.cart.reduce((acc, el) => acc + el.cost, 0);
+
   return (
     <main className="cart-page">
       <h1>Check out</h1>
       {cart}
-      <p className="total-cost">Total: </p>
+      <p className="total-cost">Total: ${total}</p>
       <div className="order-button">
         <button>Place Order</button>
       </div>
