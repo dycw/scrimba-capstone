@@ -19,16 +19,21 @@ export default function Image(props: Props) {
   const handleMouseLeave = () => {
     setIsHovered((_: boolean) => false);
   };
-  const handleClick = () => {
+  const handleClickHeart = () => {
     context.toggleFavorite(props.photo.id);
+  };
+  const handleClickCart = () => {
+    context.addToCart(props.photo);
   };
 
   const isFavorite = props.photo.isFavorite;
   const heartClass = isFavorite ? "ri-heart-fill" : "ri-heart-line";
   const heartIcon = (isFavorite || isHovered) && (
-    <i className={`${heartClass} favorite`} onClick={handleClick}></i>
+    <i className={`${heartClass} favorite`} onClick={handleClickHeart}></i>
   );
-  const cartIcon = isHovered && <i className="ri-add-circle-line cart"></i>;
+  const cartIcon = isHovered && (
+    <i className="ri-add-circle-line cart" onClick={handleClickCart}></i>
+  );
 
   return (
     <div
