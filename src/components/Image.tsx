@@ -18,6 +18,9 @@ export default function Image(props: Props) {
     console.log("left");
   };
 
+  const heartIcon = isHovered && <i className="ri-heart-line favorite"></i>;
+  const cartIcon = isHovered && <i className="ri-add-circle-line cart"></i>;
+
   return (
     <div
       className={`${props.className} image-container`}
@@ -25,6 +28,8 @@ export default function Image(props: Props) {
       onMouseLeave={handleMouseLeave}
     >
       <img src={props.url} className="image-grid" />
+      {heartIcon}
+      {cartIcon}
     </div>
   );
 }
