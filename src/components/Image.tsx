@@ -1,24 +1,30 @@
+import { Context } from "../Context";
+import { Photo } from "../data";
 import { ImageClass } from "../utils";
-import { useState } from "react";
+import { useContext } from "react";
+import { useImmer } from "use-immer";
 
 type Props = {
-  url: string;
+  photo: Photo;
   className: ImageClass;
 };
 
 export default function Image(props: Props) {
-  const [isHovered, setIsHovered] = useState(false);
-
+  const [isHovered, setIsHovered] = useImmer(false);
   const handleMouseEnter = () => {
-    setIsHovered(true);
-    console.log("entered");
+    setIsHovered((_: boolean) => true);
   };
   const handleMouseLeave = () => {
-    setIsHovered(false);
-    console.log("left");
+    setIsHovered((_: boolean) => false);
+  };
+  const context = useContext(Context);
+  const handleClick = () => {
+    context.toggleFavorite(props.photo.id);
   };
 
-  const heartIcon = isHovered && <i className="ri-heart-line favorite"></i>;
+  const heartIcon = isHovered && (
+    <i className="ri-heart-line favorite" onClick={handleClick}></i>
+  );
   const cartIcon = isHovered && <i className="ri-add-circle-line cart"></i>;
 
   return (
@@ -27,7 +33,7 @@ export default function Image(props: Props) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <img src={props.url} className="image-grid" />
+      <img src={props.photo.url} className="image-grid" />
       {heartIcon}
       {cartIcon}
     </div>

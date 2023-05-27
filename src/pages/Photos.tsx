@@ -16,7 +16,7 @@ export default function Photos() {
 
   const render = (photo: Photo) => {
     const imageClass = getImageClass(photo.id);
-    return <Image key={photo.id} url={photo.url} className={imageClass} />;
+    return <Image key={photo.id} photo={photo} className={imageClass} />;
   };
 
   const photos = context.photos.map(render);
